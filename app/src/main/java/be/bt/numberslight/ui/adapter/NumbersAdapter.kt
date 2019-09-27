@@ -2,15 +2,16 @@ package be.bt.numberslight.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+
 import be.bt.numberslight.R
 import be.bt.numberslight.databinding.NumbersListItemBinding
 import be.bt.numberslight.model.NumberModel
+
 import com.squareup.picasso.Picasso
-import java.lang.ref.WeakReference
 
 /**
  * The class which implement the adapter of the RecyclerView which will display the data
@@ -24,8 +25,10 @@ class NumbersAdapter(
     private val callback: ClickListener
 ) : RecyclerView.Adapter<NumbersAdapter.MyViewHolder>() {
 
-    // TODO : find a solution to keep the value when we change the fragment
-    private var selectedPos = RecyclerView.NO_POSITION
+    // I create companion object to keep in memory which one is selected
+    companion object {
+        var selectedPos = RecyclerView.NO_POSITION
+    }
 
     // The interface for the callback to link the fragment and the viewHolder
     interface ClickListener {
@@ -38,7 +41,6 @@ class NumbersAdapter(
             R.layout.numbers_list_item,
             parent, false
         )
-
         return MyViewHolder(binding, callback)
     }
 
@@ -51,48 +53,32 @@ class NumbersAdapter(
         // The item is selected if we clicked on it
         holder.binding.clItem.isSelected = (selectedPos == position)
 
-        Picasso.get().load(listItem[position].url).into(holder.binding.imageView)
+        if (listItem[position].url != "") {
+            Picasso.get().load(listItem[position].url).into(holder.binding.imageView)
+        }
 
     }
 
 
-    inner class MyViewHolder : RecyclerView.ViewHolder, View.OnClickListener {
+    inner class MyViewHolder(
+        val binding: NumbersListItemBinding,
+        private val callback: ClickListener
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        val binding: NumbersListItemBinding
-        // I keep a weak reference to avoid a strong reference to the Fragment
-        private val callbackWeakRef: WeakReference<ClickListener>
-
-        constructor(
-            binding: NumbersListItemBinding,
-            callback: ClickListener
-        ) : super(binding.root) {
-            this.binding = binding
-            this.callbackWeakRef = WeakReference(callback)
-
-            this.binding.clItem.setOnClickListener(this)
-            // The button are here to see the change of state on the click
-            // TODO : Remove later
-            this.binding.button.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View?) {
-            when (v!!.id) {
-                R.id.cl_item -> {
-                    if (adapterPosition == RecyclerView.NO_POSITION) return
+        init {
+            this.binding.clItem.setOnClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION) {
 
                     notifyItemChanged(selectedPos)
                     selectedPos = adapterPosition
                     notifyItemChanged(selectedPos)
-                }
-                R.id.button -> {
-                    val callback = callbackWeakRef.get()
-                    callback?.let {
-                        it.clikOnDetail(binding.number!!)
-                    }
 
+                    callback.clikOnDetail(binding.number!!)
                 }
+
             }
         }
+
     }
 
 }

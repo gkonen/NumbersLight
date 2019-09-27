@@ -40,7 +40,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
-
     // Data Binding
     kapt "com.android.databinding:compiler:$gradle_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -53,9 +52,6 @@ dependencies {
     // NavigationGraph
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
-    // Coroutine
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
 
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'

@@ -39,7 +39,9 @@ class DetailsFragment : Fragment() {
                 Toast.makeText(this@DetailsFragment.context, "Networking Error", Toast.LENGTH_LONG)
                     .show()
             } else {
-                Picasso.get().load(this.url).into(binding.ivDetails)
+                if (this.url != "") {
+                    Picasso.get().load(this.url).into(binding.ivDetails)
+                }
             }
         }
 

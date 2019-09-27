@@ -10,8 +10,8 @@ import retrofit2.http.Query;
 
 
 /**
- * I choose to write in Java all the logic for the requests of the server
- * <p>
+ * I choose to write in Java all the logic for requesting data
+ *
  * The interface of the request which will be implemented by Retrofit
  */
 public interface ServiceAPI {

@@ -2,6 +2,7 @@ package be.bt.numberslight.ui.fragment.listfragment
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -119,7 +120,11 @@ class ListFragment : Fragment(), NumbersAdapter.ClickListener {
         callback!!.saveNumber(number)
 
         if (!twoPanel) {
-            this.findNavController().navigate(R.id.mainFragment_to_detailsFragment)
+            // I delayed just to see the state selected
+            Handler().postDelayed({
+                this.findNavController().navigate(R.id.mainFragment_to_detailsFragment)
+            }, 500)
+
         } else {
             val fragment = DetailsFragment()
             activity!!.supportFragmentManager
