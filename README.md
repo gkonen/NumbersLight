@@ -2,6 +2,7 @@
 Projet réalisé en vue d'un poste de développeur chez Tapptic sur une période de 7 jours.
 
 Le but est d'afficher une liste de nombre avec leur image ainsi que leurs détails dans un affichage dédié. En cas de tablette, les deux affichages doivent se partager l'écran en mode paysage sinon un deuxième écran est affiché. 
+
 ## Commentaires :
 
 ### Exigences respectées :
@@ -22,6 +23,8 @@ De plus, j'ai utilisé le graphe de navigation pour la gestion des fragments. J'
 * J'ai utilisé le patron d'Android Studio Master View Detail/Flow afin de décider du seuil entre téléphone et tablette à savoir une largeur de 900. 
 Cependant, je n'ai pas utilisé ce patron pour construire l'application.
 
+* Par commodité, la dimension des images ont une valeur fixe. J'ai concentré mes efforts pour l'application plutot que d'avoir un visuel propre. De fait, sur le visuel n'est pas adapté pour une résolution trop petite.
+ 
 
 ### Problèmes rencontrées : 
 
