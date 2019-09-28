@@ -17,6 +17,11 @@ public class RepositoryLocalData implements Repository {
 
     private LocalData data = new LocalData();
 
+    /**
+     * Retrieve local data
+     *
+     * @return ArrayList with all data hardcoded
+     */
     @Override
     @SuppressWarnings("unchecked")
     public MutableLiveData<ArrayList<NumberModel>> getAllNumber() {
@@ -25,6 +30,12 @@ public class RepositoryLocalData implements Repository {
         return myList;
     }
 
+    /**
+     * Retrieve detail from a specific name
+     *
+     * @param name of the number I want the detail
+     * @return NumberDetailModel which contains the information I want display
+     */
     @Override
     @SuppressWarnings("unchecked")
     public MutableLiveData<NumberDetailModel> getDetailNumber(String name) {

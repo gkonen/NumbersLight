@@ -16,7 +16,7 @@ class ListViewModel : ViewModel() {
     val listItem: LiveData<ArrayList<NumberModel>>
         get() = _listItem
 
-    // The repository will retrieve the data to separate clearly the role
+    // I retrieve the good repository by my factory determined in the activity
     private val repository = FactoryRepository.getRepository(MainActivity.repositoryName)
 
     init {

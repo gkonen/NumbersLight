@@ -6,10 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * I choose to write in Java all the logic for requesting data
  *
- * The singleton which will implement Retrofit so we have access the api everywhere
+ * The singleton permit to implement once the retrofit interface.
  *
- * As for this project, I use it only inside RepositoryRemoteData, I could implement ServiceAPI in the other Singleton
- * however I prefer keep generality.
  */
 public class NetworkClient {
 

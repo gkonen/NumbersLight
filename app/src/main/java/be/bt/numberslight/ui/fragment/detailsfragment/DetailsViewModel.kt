@@ -11,14 +11,14 @@ import be.bt.numberslight.ui.activity.MainActivity
 
 class DetailsViewModel : ViewModel() {
 
-    private var _number = MutableLiveData<NumberDetailModel>(
-        NumberDetailModel("name of Number", "Japanese Name", "url displaying image")
-    )
+    private var _number = MutableLiveData<NumberDetailModel>()
     val number: LiveData<NumberDetailModel>
         get() = _number
 
+    // I retrieve the good repository by my factory determined in the activity
     private val repository = FactoryRepository.getRepository(MainActivity.repositoryName)
 
+    // Once I retrieve the number selected by the user, I request the details otherwise the number could be null
     var numberPicked: NumberModel? = null
         set(value) {
             value?.let {

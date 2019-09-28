@@ -4,6 +4,8 @@ import android.os.Handler;
 
 import androidx.lifecycle.MutableLiveData;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 import be.bt.numberslight.model.NumberDetailModel;
@@ -16,20 +18,13 @@ import retrofit2.Response;
 
 /**
  * I choose to write in Java all the logic for requesting data
- * <p>
+ *
  * This repository retrieve data from remote source to deliver data to the ViewModel
  */
 public class RepositoryRemoteData implements Repository {
 
-    private static RepositoryRemoteData repositoryRemoteData;
-    private ServiceAPI api = NetworkClient.getAPI();
 
-    public static RepositoryRemoteData getInstance() {
-        if (repositoryRemoteData == null) {
-            repositoryRemoteData = new RepositoryRemoteData();
-        }
-        return repositoryRemoteData;
-    }
+    private ServiceAPI api = NetworkClient.getAPI();
 
     /**
      * The request which retrieve from the server all the number
@@ -44,12 +39,12 @@ public class RepositoryRemoteData implements Repository {
         api.getAllNumber().enqueue(new Callback<ArrayList<NumberModel>>() {
 
             @Override
-            public void onResponse(Call<ArrayList<NumberModel>> call, Response<ArrayList<NumberModel>> response) {
+            public void onResponse(@NotNull Call<ArrayList<NumberModel>> call, @NotNull Response<ArrayList<NumberModel>> response) {
                 myListofNumber.postValue(response.body());
             }
 
             @Override
-            public void onFailure(Call<ArrayList<NumberModel>> call, Throwable t) {
+            public void onFailure(@NotNull Call<ArrayList<NumberModel>> call, @NotNull Throwable t) {
                 myListofNumber.postValue(null);
                 retry(call, this);
             }
@@ -84,12 +79,12 @@ public class RepositoryRemoteData implements Repository {
         final MutableLiveData myNumber = new MutableLiveData<NumberDetailModel>();
         api.getDetailNumber(name).enqueue(new Callback<NumberDetailModel>() {
             @Override
-            public void onResponse(Call<NumberDetailModel> call, Response<NumberDetailModel> response) {
+            public void onResponse(@NotNull Call<NumberDetailModel> call, @NotNull Response<NumberDetailModel> response) {
                 myNumber.setValue(response.body());
             }
 
             @Override
-            public void onFailure(Call<NumberDetailModel> call, Throwable t) {
+            public void onFailure(@NotNull Call<NumberDetailModel> call, @NotNull Throwable t) {
                 myNumber.setValue(null);
             }
         });

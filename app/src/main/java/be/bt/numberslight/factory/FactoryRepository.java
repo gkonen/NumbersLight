@@ -7,7 +7,7 @@ import be.bt.numberslight.repository.RepositoryRemoteData;
 
 /**
  * I choose to write in Java all the logic for requesting data
- * <p>
+ *
  * Following my choice, I take data from different source, by the Factory Pattern
  * it is transparent to the ViewModel
  */
@@ -20,7 +20,7 @@ public class FactoryRepository {
                 repository = new RepositoryLocalData();
                 break;
             case REMOTEDATA:
-                repository = RepositoryRemoteData.getInstance();
+                repository = new RepositoryRemoteData();
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + name);
